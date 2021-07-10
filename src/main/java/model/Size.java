@@ -3,46 +3,54 @@ package model;
 import java.util.Objects;
 
 public class Size {
-    private float length;
-    private float width;
-    private float perimeter;
+    private double length;
+    private double width;
+    private double perimeter;
 
     public Size() {
     }
 
-    public Size(float length, float width) {
+    public Size(double length, double width) {
         this.length = length;
         this.width = width;
+        this.setPerimeter();
     }
 
-    public float getLength() {
+    public double getLength() {
         return length;
     }
 
-    public void setLength(float length) {
+    public void setLength(double length) {
         this.length = length;
+        setPerimeter();
     }
 
-    public float getWidth() {
+    public double getWidth() {
         return width;
     }
 
-    public void setWidth(float width) {
+    public void setWidth(double width) {
         this.width = width;
+        setPerimeter();
     }
 
-    public float getPerimeter() {
-        return (getLength()+getWidth())*2;
+    public double getPerimeter() {
+        return perimeter;
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Size)) return false;
         Size size = (Size) o;
-        return Float.compare(size.getLength(), getLength()) == 0 &&
-                Float.compare(size.getWidth(), getWidth()) == 0 &&
-                Float.compare(size.getPerimeter(), getPerimeter()) == 0;
+        return Double.compare(size.getLength(), getLength()) == 0 &&
+                Double.compare(size.getWidth(), getWidth()) == 0 &&
+                Double.compare(size.getPerimeter(), getPerimeter()) == 0;
+    }
+
+    private void setPerimeter() {
+        perimeter = getLength() + getWidth() * 2;
     }
 
     @Override
@@ -58,4 +66,5 @@ public class Size {
                 ", perimeter=" + perimeter +
                 '}';
     }
+
 }

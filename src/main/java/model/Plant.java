@@ -5,9 +5,9 @@ import java.util.Objects;
 public class Plant {
     private String name;
     private String color;
-    private int stebel;
+    private int petalCount;
     private int lifeTime;
-    private float price;
+    private double price;
     private Size size;
 
     public Plant() {
@@ -22,12 +22,28 @@ public class Plant {
         this.size = new Size();
     }
 
-    public Plant(String name, String color, int stebel, int lifeTime, float price) {
-        this(name,color);
-        this.stebel = stebel;
+    public Plant(String name, String color, int petalCount, int lifeTime, double price) {
+        this(name, color);
+        this.petalCount = petalCount;
         this.lifeTime = lifeTime;
         this.price = price;
+    }
 
+    public Plant(String name, String color, int petalCount, int lifeTime, double price, Size size) {
+        this.name = name;
+        this.color = color;
+        this.petalCount = petalCount;
+        this.lifeTime = lifeTime;
+        this.price = price;
+        this.size = size;
+    }
+
+    public Plant(Plant p) {
+        this.name = p.name;
+        this.color = p.color;
+        this.petalCount = p.petalCount;
+        this.lifeTime = p.lifeTime;
+        this.price = p.price;
     }
 
     public String getName() {
@@ -38,15 +54,15 @@ public class Plant {
         return color;
     }
 
-    public int getStebel() {
-        return stebel;
+    public int getPetalCount() {
+        return petalCount;
     }
 
     public int getLifeTime() {
         return lifeTime;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -58,27 +74,27 @@ public class Plant {
         this.color = color;
     }
 
-    public void setStebel(int stebel) {
-        this.stebel = stebel;
+    public void setPetalCount(int petalCount) {
+        this.petalCount = petalCount;
     }
 
     public void setLifeTime(int lifeTime) {
         this.lifeTime = lifeTime;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
 
-    public float addPrice(float add){
-        this.price+=add;
+    public double addPrice(double add) {
+        this.price += add;
         return this.price;
     }
 
     //=======================Method 2=========================
 
-    public String getPlantColor(){
+    public String getPlantColor() {
         return this.getColor();
     }
 
@@ -87,7 +103,7 @@ public class Plant {
         return "Plant{" +
                 "name='" + name + '\'' +
                 ", color='" + color + '\'' +
-                ", stebel=" + stebel +
+                ", stebel=" + petalCount +
                 ", lifeTime=" + lifeTime +
                 ", price=" + price +
                 '}';
@@ -98,17 +114,16 @@ public class Plant {
         if (this == o) return true;
         if (!(o instanceof Plant)) return false;
         Plant plant = (Plant) o;
-        return getStebel() == plant.getStebel() &&
+        return getPetalCount() == plant.getPetalCount() &&
                 getLifeTime() == plant.getLifeTime() &&
-                Float.compare(plant.getPrice(), getPrice()) == 0 &&
-                getName().equals(plant.getName()) &&
-                getColor().equals(plant.getColor());
+                Double.compare(plant.getPrice(), getPrice()) == 0 &&
+                Objects.equals(getName(), plant.getName()) &&
+                Objects.equals(getColor(), plant.getColor()) &&
+                Objects.equals(size, plant.size);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getColor(), getStebel(), getLifeTime(), getPrice());
+        return Objects.hash(getName(), getColor(), getPetalCount(), getLifeTime(), getPrice(), size);
     }
-
-
 }
